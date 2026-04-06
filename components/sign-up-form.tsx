@@ -14,13 +14,12 @@ import { Text } from '@/components/ui/text';
 import { useSession } from '@/hooks/useSession';
 import { useRouter } from 'expo-router';
 import * as React from 'react';
-import { Pressable, type TextInput, View } from 'react-native';
+import { Pressable, TextInput, View } from 'react-native';
 
-export function SignInForm() {
-
+export function SignUpForm() {
+  const passwordInputRef = React.useRef<TextInput>(null);
   const { signIn } = useSession();
   const router = useRouter();
-  const passwordInputRef = React.useRef<TextInput>(null);
 
   function onEmailSubmitEditing() {
     passwordInputRef.current?.focus();
@@ -30,13 +29,14 @@ export function SignInForm() {
     await signIn();
     router.replace('/');
   }
+
   return (
     <View className="gap-6">
       <Card className="border-border/0 sm:border-border shadow-none sm:shadow-sm sm:shadow-black/5">
         <CardHeader>
-          <CardTitle className="text-center text-xl sm:text-left">Sign in to your app</CardTitle>
+          <CardTitle className="text-center text-xl sm:text-left">Create your account</CardTitle>
           <CardDescription className="text-center sm:text-left">
-            Welcome back! Please sign in to continue
+            Welcome! Please fill in the details to get started.
           </CardDescription>
         </CardHeader>
         <CardContent className="gap-6">
@@ -57,15 +57,6 @@ export function SignInForm() {
             <View className="gap-1.5">
               <View className="flex-row items-center">
                 <Label htmlFor="password">Password</Label>
-                <Button
-                  variant="link"
-                  size="sm"
-                  className="web:h-fit ml-auto h-4 px-1 py-0 sm:h-4"
-                  onPress={() => {
-                    // TODO: Navigate to forgot password screen
-                  }}>
-                  <Text className="font-normal leading-4">Forgot your password?</Text>
-                </Button>
               </View>
               <Input
                 ref={passwordInputRef}
@@ -79,18 +70,16 @@ export function SignInForm() {
               <Text>Continue</Text>
             </Button>
           </View>
-          <View className="flex-row items-center justify-center">
-            <Text className="text-center text-sm">
-              Don&apos;t have an account?{' '}
-            </Text>
+          <Text className="text-center text-sm">
+            Already have an account?{' '}
             <Pressable
               onPress={() => {
-                // TODO: Navigate to sign up screen
-                router.push('/sign-up')
+                // TODO: Navigate to sign in screen
+                router.push("/sign-in")
               }}>
-              <Text className="text-sm underline">Sign up</Text>
+              <Text className="text-sm underline">Sign in</Text>
             </Pressable>
-          </View>
+          </Text>
           <View className="flex-row items-center">
             <Separator className="flex-1" />
             <Text className="text-muted-foreground px-4 text-sm">or</Text>

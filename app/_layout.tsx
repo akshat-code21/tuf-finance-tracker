@@ -1,6 +1,7 @@
 import '@/global.css';
 
 import { FinanceProvider } from '@/context/FinanceContext';
+import { SessionProvider } from '@/context/SessionContext';
 import { NAV_THEME } from '@/lib/theme';
 import { ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
@@ -8,21 +9,23 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'nativewind';
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
+export { ErrorBoundary } from 'expo-router';
 
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
 
   return (
-    <FinanceProvider>
-      <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
-        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-        <Stack />
-        <PortalHost />
-      </ThemeProvider>
-    </FinanceProvider>
+    <SessionProvider>
+      <FinanceProvider>
+        <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
+          <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="(auth)" />
+            <Stack.Screen name="(tabs)" />
+          </Stack>
+          <PortalHost />
+        </ThemeProvider>
+      </FinanceProvider>
+    </SessionProvider>
   );
 }
