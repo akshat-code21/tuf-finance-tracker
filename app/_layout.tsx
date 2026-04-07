@@ -1,4 +1,5 @@
 import '@/global.css';
+import 'react-native-gesture-handler';
 
 import { FinanceProvider } from '@/context/FinanceContext';
 import { SessionProvider } from '@/context/SessionContext';
@@ -19,6 +20,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'nativewind';
 import { useEffect } from 'react';
 import { View } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -46,19 +48,21 @@ export default function RootLayout() {
   }
 
   return (
-    <View className="flex-1 font-sans">
-      <SessionProvider>
-        <FinanceProvider>
-          <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
-            <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
-            <Stack screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="(auth)" />
-              <Stack.Screen name="(tabs)" />
-            </Stack>
-            <PortalHost />
-          </ThemeProvider>
-        </FinanceProvider>
-      </SessionProvider>
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View className="flex-1 font-sans">
+        <SessionProvider>
+          <FinanceProvider>
+            <ThemeProvider value={NAV_THEME[colorScheme ?? 'light']}>
+              <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+              <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="(auth)" />
+                <Stack.Screen name="(tabs)" />
+              </Stack>
+              <PortalHost />
+            </ThemeProvider>
+          </FinanceProvider>
+        </SessionProvider>
+      </View>
+    </GestureHandlerRootView>
   );
 }

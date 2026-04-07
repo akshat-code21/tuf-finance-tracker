@@ -13,8 +13,8 @@ import CategoryGrid from '@/components/categories/CategoryGrid';
 import AddCategoryForm from '@/components/categories/AddCategoryForm';
 import ThemeToggle from '@/components/common/ThemeToggle';
 import SegmentedControl from '@/components/common/SegmentedControl';
-import TransactionRow from '@/components/transactions/TransactionRow';
-import { LogOut, Sun, Moon, ArrowLeft } from 'lucide-react-native';
+import CategoryTransactionsPanel from '@/components/settings/CategoryTransactionsPanel';
+import { LogOut, Sun, Moon } from 'lucide-react-native';
 import type { Category } from '@/types/finance';
 
 const CAT_TYPE_TABS = [
@@ -49,47 +49,13 @@ export default function SettingsScreen() {
   };
 
   if (selectedCategory) {
-    const filtered = transactions.filter(
-      (t) => t.categoryId === selectedCategory.id
-    );
-
     return (
-      <View className="flex-1 bg-background" style={{ paddingTop: insets.top }}>
-        <View className="flex-row items-center gap-3 px-4 py-3">
-          <Pressable onPress={() => setSelectedCategory(null)} hitSlop={12}>
-            <ArrowLeft size={22} color={isDark ? '#e2e8f0' : '#1e293b'} />
-          </Pressable>
-          <Text className="text-foreground text-lg font-bold flex-1">
-            {selectedCategory.name}
-          </Text>
-          <Text className="text-muted-foreground text-sm">
-            {filtered.length} transaction{filtered.length !== 1 ? 's' : ''}
-          </Text>
-        </View>
-
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 100 }}
-        >
-          {filtered.length === 0 ? (
-            <View className="py-16 items-center">
-              <Text className="text-muted-foreground text-sm text-center">
-                No transactions in this category yet
-              </Text>
-            </View>
-          ) : (
-            filtered
-              .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-              .map((tx) => (
-                <TransactionRow
-                  key={tx.id}
-                  transaction={tx}
-                  category={selectedCategory}
-                />
-              ))
-          )}
-        </ScrollView>
-      </View>
+      <CategoryTransactionsPanel
+        category={selectedCategory}
+        transactions={transactions}
+        onClose={() => setSelectedCategory(null)}
+        isDark={isDark}
+      />
     );
   }
 
