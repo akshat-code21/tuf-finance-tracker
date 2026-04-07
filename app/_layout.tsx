@@ -4,14 +4,8 @@ import 'react-native-gesture-handler';
 import { FinanceProvider } from '@/context/FinanceContext';
 import { SessionProvider } from '@/context/SessionContext';
 import { NAV_THEME } from '@/lib/theme';
-import {
-  useFonts,
-  BricolageGrotesque_400Regular,
-  BricolageGrotesque_500Medium,
-  BricolageGrotesque_600SemiBold,
-  BricolageGrotesque_700Bold,
-  BricolageGrotesque_800ExtraBold,
-} from '@expo-google-fonts/bricolage-grotesque';
+import { useFonts } from '@expo-google-fonts/bricolage-grotesque';
+import { BRICOLAGE_FONT_MAP } from '@/lib/fonts';
 import { ThemeProvider } from '@react-navigation/native';
 import { PortalHost } from '@rn-primitives/portal';
 import { Stack } from 'expo-router';
@@ -29,13 +23,7 @@ export { ErrorBoundary } from 'expo-router';
 export default function RootLayout() {
   const { colorScheme } = useColorScheme();
 
-  const [loaded, error] = useFonts({
-    BricolageGrotesque_400Regular,
-    BricolageGrotesque_500Medium,
-    BricolageGrotesque_600SemiBold,
-    BricolageGrotesque_700Bold,
-    BricolageGrotesque_800ExtraBold,
-  });
+  const [loaded, error] = useFonts(BRICOLAGE_FONT_MAP);
 
   useEffect(() => {
     if (loaded || error) {

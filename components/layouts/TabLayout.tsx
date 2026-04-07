@@ -1,16 +1,41 @@
+import { useEffect, useState } from 'react';
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useFonts } from '@expo-google-fonts/bricolage-grotesque';
+import { Platform } from 'react-native';
 import { useColorScheme } from 'nativewind';
 import { COLORS } from '@/lib/colors';
-import { BRICOLAGE } from '@/lib/fonts';
+import { BRICOLAGE, BRICOLAGE_FONT_MAP } from '@/lib/fonts';
 
 export default function TabLayout() {
   const { colorScheme } = useColorScheme();
   const isDark = colorScheme === 'dark';
   const tab = isDark ? COLORS.tabBar.dark : COLORS.tabBar.light;
 
+  const [fontsLoaded] = useFonts(BRICOLAGE_FONT_MAP);
+  const [tabNavRemountKey, setTabNavRemountKey] = useState(0);
+
+  useEffect(() => {
+    if (!fontsLoaded) return;
+    let cancelled = false;
+    let innerFrame: number | undefined;
+    const outerFrame = requestAnimationFrame(() => {
+      innerFrame = requestAnimationFrame(() => {
+        if (!cancelled) {
+          setTabNavRemountKey((k) => k + 1);
+        }
+      });
+    });
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(outerFrame);
+      if (innerFrame !== undefined) cancelAnimationFrame(innerFrame);
+    };
+  }, [fontsLoaded]);
+
   return (
     <NativeTabs
+      key={tabNavRemountKey}
       backgroundColor={tab.bg}
       iconColor={{ default: tab.inactive, selected: tab.active }}
       labelStyle={{
@@ -28,6 +53,7 @@ export default function TabLayout() {
         },
       }}
       tintColor={tab.active}
+      labelVisibilityMode={Platform.OS === 'android' ? 'labeled' : undefined}
     >
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>

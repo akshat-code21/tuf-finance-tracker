@@ -1,7 +1,20 @@
-/**
- * Family names must match keys passed to `useFonts` in `app/_layout.tsx`.
- * On React Native, each weight is a separate file — use `fontWeight: '400'` with the matching face.
- */
+import {
+  BricolageGrotesque_400Regular,
+  BricolageGrotesque_500Medium,
+  BricolageGrotesque_600SemiBold,
+  BricolageGrotesque_700Bold,
+  BricolageGrotesque_800ExtraBold,
+} from '@expo-google-fonts/bricolage-grotesque';
+
+export const BRICOLAGE_FONT_MAP = {
+  BricolageGrotesque_400Regular,
+  BricolageGrotesque_500Medium,
+  BricolageGrotesque_600SemiBold,
+  BricolageGrotesque_700Bold,
+  BricolageGrotesque_800ExtraBold,
+} as const;
+
+
 export const BRICOLAGE = {
   regular: 'BricolageGrotesque_400Regular',
   medium: 'BricolageGrotesque_500Medium',
