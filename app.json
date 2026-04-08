@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": ".",
-    "slug": ".",
+    "slug": "tuf-finance",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.akshatcode21.myapp"
     },
     "web": {
       "bundler": "metro",
@@ -45,6 +46,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "6d42326d-b2f9-498a-a50a-af9d7a388b57"
+      }
+    },
+    "owner": "akshat-code21"
   }
 }
