@@ -89,7 +89,7 @@ export default function HomeScreen() {
         </View>
         <View className="mt-6">
           <RecentTransactions
-            transactions={transactions}
+            transactions={transactions.slice(0,4)}
             categories={categories}
             onSeeAll={() => router.push('/(tabs)/transactions')}
             onTransactionPress={() => router.push('/(tabs)/transactions')}
