@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { COLORS } from '@/lib/colors';
 import { useColorScheme } from 'nativewind';
 
-const TAB_BAR_OFFSET = Platform.select({ ios: 23, android: 56, default: 23 });
+const TAB_BAR_OFFSET = Platform.select({ ios: 23, android: 23, default: 23 });
 
 type Props = {
   onPress: () => void;

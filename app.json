@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "Tuf Finance",
-    "slug": "tuf-finance",
+    "name": "PayUForward",
+    "slug": "payuforward",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "tuf-finance",
+    "icon": "./assets/images/logo_bg.png",
+    "scheme": "payuforward",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/logo_bg.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -21,15 +21,15 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/images/logo_bg.png",
+        "backgroundColor": "#000000"
       },
       "package": "com.akshatcode21.myapp"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/logo_bg.png"
     },
     "plugins": [
       "expo-router",
