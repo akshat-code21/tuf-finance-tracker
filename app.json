@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": ".",
+    "name": "Tuf Finance",
     "slug": "tuf-finance",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": ".",
+    "scheme": "tuf-finance",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
